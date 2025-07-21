@@ -1,7 +1,4 @@
 
-import { useState, useEffect } from "react";
-
-
 function RecipeList({ recipes, loading }) {
   if (loading) return <p>Loading...</p>;
 
@@ -14,6 +11,7 @@ function RecipeList({ recipes, loading }) {
           <h3>Description: {recipe.description}</h3>
           <h3>Difficulty: {recipe.difficulty}</h3>
           <p>Cooking mood: {recipe.musicUrl}</p>
+          <p>Category: {recipe.category}</p>
         </div>
       ))}
     </>
