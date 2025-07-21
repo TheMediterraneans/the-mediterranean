@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
@@ -11,10 +11,9 @@ const firebaseConfig = {
   messagingSenderId: "29302074855",
   appId: "1:29302074855:web:6d657656f2c82354abe142"
 };
-const app = initializeApp(firebaseConfig);
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+
 const auth = getAuth(app);
 const database = getDatabase(app);
-
-
 
 export { app, auth, database };
