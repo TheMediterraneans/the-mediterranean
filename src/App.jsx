@@ -64,6 +64,24 @@ function App() {
     });
 };
 
+  const editRecipe = (recipeId, updatedRecipe) => {
+  const db = getDatabase();
+  const recipeRef = ref(db, `recipes/${recipeId}`);
+
+  update(recipeRef, updatedRecipe)
+    .then(() => {
+      setRecipes(prev =>
+        prev.map(recipe =>
+          recipe.id === recipeId ? { ...recipe, ...updatedRecipe } : recipe
+        )
+      );
+    })
+    .catch((error) => {
+      console.error("Error updating recipe:", error);
+    });
+};
+
+
 
   return (
     <>
@@ -72,6 +90,7 @@ function App() {
         <Route path="recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/create" element={<AddRecipe onCreate={createNewRecipe} />} />
+        <Route path="/edit" element={<EditRecipesLoggedUsers onEdit={editRecipe}/>} />
       </Routes>
 
       
