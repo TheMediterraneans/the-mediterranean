@@ -15,8 +15,7 @@ function App() {
 
   return (
     <>
-
-
+    <RecipeList />
     </>
   )
 }
