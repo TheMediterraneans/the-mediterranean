@@ -10,6 +10,7 @@ import About from "./pages/About";
 import EditRecipesLoggedUsers from "./pages/EditRecipesLoggedUsers";
 import CreateAccount from "./pages/CreateAccount";
 import Playlist from "./components/Playlist";
+import EditRecipe from "./components/EditRecipe";
 import { useEffect, useState } from "react";
 import { ref, get, push, set, serverTimestamp } from "firebase/database";
 import { database } from "./firebase/firebaseConfig";
@@ -90,7 +91,8 @@ function App() {
         <Route path="recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/create" element={<AddRecipe onCreate={createNewRecipe} />} />
-        <Route path="/edit" element={<EditRecipesLoggedUsers onEdit={editRecipe}/>} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetails/>} />
+        <Route path="/recipes/:recipeId/edit" element={<EditRecipesLoggedUsers onEdit={editRecipe}/>} />
       </Routes>
 
       
