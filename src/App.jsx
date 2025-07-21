@@ -1,4 +1,14 @@
-
+import { Routes, Route } from "react-router-dom";
+import RecipeList from "./pages/RecipeList";
+import Homepage from "./pages/Homepage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AddRecipe from "./pages/AddRecipe";
+import RecipeDetails from "./pages/RecipeDetails";
+import LoginPage from "./pages/LoginPage";
+import About from "./pages/About";
+import CreateAccount from "./pages/CreateAccount";
+import Playlist from "./components/Playlist";
 
 function App() {
 
@@ -6,26 +16,9 @@ function App() {
   return (
     <>
 
-    <div className="p-6">
-      <button className="btn btn-primary">
-        ✅ DaisyUI is working!
-      </button>
-    </div>
-
-    <div className="card w-96 bg-base-100 shadow-xl">
-  <figure>
-    <img src="https://placekitten.com/200/200" alt="a card"/>
-  </figure>
-  <div className="card-body">
-    <h2 className="card-title">Just a card</h2>
-    <p>If you can see this card, DaisyUI works!</p>
-    <button className="btn btn-secondary">Click me</button>
-  </div>
-</div>
-
 
     </>
   )
 }
 
-export default App
+export default App;
