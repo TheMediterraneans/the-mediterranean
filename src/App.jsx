@@ -87,6 +87,12 @@ function App() {
     });
 };
 
+const deleteRecipe = (recipeId) => {
+  const newRecipeList = recipes.filter((recipe) => recipe.id != recipeId);
+  setRecipes(newRecipeList);
+
+}
+
 
 
   return (
@@ -98,6 +104,7 @@ function App() {
         <Route path="/create" element={<AddRecipe onCreate={createNewRecipe} />} />
         <Route path="/recipes/:recipeId" element={<RecipeDetails/>} />
         <Route path="/recipes/:recipeId/edit" element={<EditRecipesLoggedUsers onEdit={editRecipe}/>} />
+        <Route path="/recipes/:recipeId" element={<RecipeDetails recipe={recipes} onDelete={deleteRecipe} />} />
       </Routes>
 
       
