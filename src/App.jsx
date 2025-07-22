@@ -1,4 +1,8 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ref, get, push, set, serverTimestamp } from "firebase/database";
+import { database } from "./firebase/firebaseConfig";
+
 import RecipeList from "./pages/RecipeList";
 import Homepage from "./pages/Homepage";
 import Navbar from "./components/Navbar";
@@ -11,17 +15,9 @@ import EditRecipesLoggedUsers from "./pages/EditRecipesLoggedUsers";
 import CreateAccount from "./pages/CreateAccount";
 import Playlist from "./components/Playlist";
 import EditRecipe from "./components/EditRecipe";
-import { useEffect, useState } from "react";
-import { ref, get, push, set, serverTimestamp } from "firebase/database";
-import { database } from "./firebase/firebaseConfig";
-
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
-// useEffect(() => {
-//   document.documentElement.setAttribute("data-theme", "cupcake");
-// }, []);
-
 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,7 +92,9 @@ const deleteRecipe = (recipeId) => {
 
 
   return (
-    <div  className="w-screen min-h-screen bg-base-100 text-base-content">
+    <div>
+      <Navbar />
+      
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} />

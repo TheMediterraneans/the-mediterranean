@@ -37,13 +37,12 @@ const EditRecipe = ({ recipe, onEdit }) => {
     setIngredients(updated);
   };
 
-  const addIngredient = () => {
-    setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
-  };
+  // const addIngredient = () => {
+  //   setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
+  // };
 
   const handleSubmit = () => {
-   
-
+    if (!title.trim())
     const updatedRecipe = {
       title,
       description,
@@ -60,8 +59,8 @@ const EditRecipe = ({ recipe, onEdit }) => {
       tags: tags.split(',').map(tag => tag.trim()),
     };
 
-    onEdit(recipe.id, updatedRecipe);
-  };
+  //   onEdit(recipe.id, updatedRecipe);
+  // };
 
   return (
     <div>
