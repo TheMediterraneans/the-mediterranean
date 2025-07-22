@@ -37,9 +37,9 @@ const EditRecipe = ({ recipe, onEdit }) => {
     setIngredients(updated);
   };
 
-  // const addIngredient = () => {
-  //   setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
-  // };
+  const addIngredient = () => {
+    setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
+  };
 
   const handleSubmit = () => {
 
@@ -59,7 +59,8 @@ const EditRecipe = ({ recipe, onEdit }) => {
       tags: tags.split(',').map(tag => tag.trim()),
     };
 
-  
+    onEdit(recipe.id, updatedRecipe);
+  };
 
   return (
     <div>
@@ -85,7 +86,6 @@ const EditRecipe = ({ recipe, onEdit }) => {
       <button onClick={handleSubmit}>Save Changes</button>
     </div>
   );
-};
 };
 
 export default EditRecipe;
