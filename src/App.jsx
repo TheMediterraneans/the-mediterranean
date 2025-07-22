@@ -94,6 +94,7 @@ const deleteRecipe = (recipeId) => {
   return (
     <div>
       <Navbar />
+      
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} />

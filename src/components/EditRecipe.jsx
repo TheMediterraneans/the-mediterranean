@@ -37,30 +37,30 @@ const EditRecipe = ({ recipe, onEdit }) => {
     setIngredients(updated);
   };
 
-  const addIngredient = () => {
-    setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
-  };
+  // const addIngredient = () => {
+  //   setIngredients([...ingredients, { name: '', quantity: '', unit: '' }]);
+  // };
 
-  const handleSubmit = () => {
-    if (!title.trim())
-    const updatedRecipe = {
-      title,
-      description,
-      category,
-      difficulty: recipe.difficulty || 'easy',
-      imageUrl,
-      ingredients,
-      mood,
-      musicUrl,
-      notes,
-      prepTime: Number(prepTime),
-      preparationSteps,
-      servings: Number(servings),
-      tags: tags.split(',').map(tag => tag.trim()),
-    };
+  // const handleSubmit = () => {
+  //   if (!title.trim())
+  //   const updatedRecipe = {
+  //     title,
+  //     description,
+  //     category,
+  //     difficulty: recipe.difficulty || 'easy',
+  //     imageUrl,
+  //     ingredients,
+  //     mood,
+  //     musicUrl,
+  //     notes,
+  //     prepTime: Number(prepTime),
+  //     preparationSteps,
+  //     servings: Number(servings),
+  //     tags: tags.split(',').map(tag => tag.trim()),
+  //   };
 
-    onEdit(recipe.id, updatedRecipe);
-  };
+  //   onEdit(recipe.id, updatedRecipe);
+  // };
 
   return (
     <div>
