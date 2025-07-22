@@ -42,7 +42,8 @@ const EditRecipe = ({ recipe, onEdit }) => {
   };
 
   const handleSubmit = () => {
-    if (!title.trim())
+   
+
     const updatedRecipe = {
       title,
       description,

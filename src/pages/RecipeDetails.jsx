@@ -1,13 +1,16 @@
-import { useParams } from "react-router-dom";
-import { getDatabase, ref, get } from "firebase/database";
+import { useParams, useNavigate } from "react-router-dom";
+import { getDatabase, ref, get, remove, set } from "firebase/database";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import EditRecipe from "../components/EditRecipe";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [targetServings, setTargetServings] = useState(null); // User-selected servings
+  const [isEditing, setIsEditing] = useState(false)
 
   useEffect(() => {
     const db = getDatabase();
@@ -30,16 +33,72 @@ function RecipeDetails() {
       });
   }, [recipeId]);
 
+  const handleEdit = async (id, updatedRecipe) => {
+    try {
+        console.log('Attempting to save recipe:', updatedRecipe);
+      console.log('Recipe ID:', recipeId);
+      const db = getDatabase();
+      const recipeRef = ref(db, `recipes/${recipeId}`);
+      await set(recipeRef, updatedRecipe);
+      console.log('Recipe saved successfully');
+      
+      // Update local state with the new recipe data
+      setRecipe(updatedRecipe);
+      setTargetServings(updatedRecipe.servings);
+      setIsEditing(false);
+      
+      alert("Recipe updated successfully!");
+    } catch (error) {
+      console.error("Error saving changes:", error);
+      alert("Error saving changes");
+    }
+  };
+
+  const handleDelete = async () => {
+    // Confirm deletion
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete the recipe "${recipe.title}"? This action cannot be undone.`
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const db = getDatabase();
+      const recipeRef = ref(db, `recipes/${recipeId}`);
+      
+      // Remove the recipe from Firebase
+      await remove(recipeRef);
+      
+      alert("Recipe deleted successfully!");
+      
+      // Navigate back to recipe list
+      navigate("/recipe-list");
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+      alert("Error deleting recipe. Please try again.");
+    }
+  };
+
   const scaleIngredient = (ingredient) => {
     const ratio = targetServings / recipe.servings;
     return {
       ...ingredient,
-      quantity: parseFloat((ingredient.quantity * ratio).toFixed(2)), // round for clarity
+      quantity: Math.ceil(ingredient.quantity * ratio), // round to integer
     };
   };
 
   if (loading) return <div>Loading recipe... ⏳</div>;
   if (!recipe) return <div>Recipe not found 😢</div>;
+
+  if (isEditing) {
+    return (
+        <div>
+            <h2>Edit Recipe</h2>
+            <EditRecipe recipe={{id: recipeId,...recipe}} onEdit={handleEdit}/>
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
+        </div>
+    )
+  }
 
   return (
     <div>
@@ -108,13 +167,33 @@ function RecipeDetails() {
         </p>
       )}
 
-      <Link to={`/recipes/${recipeId}/edit`}>
-      <button>Edit this recipe</button>
-      </Link>
+      {/* Action buttons */}
+      <div style={{ marginTop: "20px" }}>
+        <Link to="/recipe-list">
+          <button style={{ marginRight: "10px" }}>Back to Recipes</button>
+        </Link>
 
-      <Link to="/recipe-list">
-        <button>Detlete this recipe</button>
-      </Link>
+        <button 
+          onClick={() => setIsEditing(true)}
+          style={{ 
+            marginRight: "10px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >
+          Edit Recipe
+        </button>
+        
+        
+        <button 
+          onClick={handleDelete}>
+          Delete Recipe
+        </button>
+      </div>
     </div>
   );
 }

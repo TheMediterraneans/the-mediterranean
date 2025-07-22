@@ -35,7 +35,7 @@ function EditRecipesLoggedUsers({ onEdit }) {
   const handleEdit = async (id, updatedRecipe) => {
   try {
     const db = getDatabase();
-    const recipeRef = ref(db, `recipes/${id}`);
+    const recipeRef = ref(db, `recipes/${recipeId}`);
     await set(recipeRef, updatedRecipe); // only override the node of the involved recipe
     alert("Recipe updated succesfully");
 
