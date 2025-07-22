@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function EditRecipe ({ recipe, onEdit }) {
+const EditRecipe = ({ recipe, onEdit }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState([]);
@@ -42,7 +42,7 @@ function EditRecipe ({ recipe, onEdit }) {
   // };
 
   const handleSubmit = () => {
-    if (!title.trim())
+
     const updatedRecipe = {
       title,
       description,
