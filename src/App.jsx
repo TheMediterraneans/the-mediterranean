@@ -18,6 +18,11 @@ import { database } from "./firebase/firebaseConfig";
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
+// useEffect(() => {
+//   document.documentElement.setAttribute("data-theme", "cupcake");
+// }, []);
+
+
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -85,7 +90,7 @@ function App() {
 
 
   return (
-    <>
+    <div  className="w-screen min-h-screen bg-base-100 text-base-content">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} />
@@ -96,7 +101,7 @@ function App() {
       </Routes>
 
       
-    </>
+    </div>
   );
 }
 
