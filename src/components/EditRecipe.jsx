@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const EditRecipe = ({ recipe, onEdit }) => {
+function EditRecipe ({ recipe, onEdit }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState([]);
@@ -59,8 +59,7 @@ const EditRecipe = ({ recipe, onEdit }) => {
       tags: tags.split(',').map(tag => tag.trim()),
     };
 
-  //   onEdit(recipe.id, updatedRecipe);
-  // };
+  
 
   return (
     <div>
@@ -86,6 +85,7 @@ const EditRecipe = ({ recipe, onEdit }) => {
       <button onClick={handleSubmit}>Save Changes</button>
     </div>
   );
+};
 };
 
 export default EditRecipe;
