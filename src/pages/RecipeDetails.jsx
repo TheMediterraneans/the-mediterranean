@@ -108,7 +108,11 @@ function RecipeDetails() {
         </p>
       )}
 
-      <Link to="recipe-list">
+      <Link to={`/recipes/${recipeId}/edit`}>
+      <button>Edit this recipe</button>
+      </Link>
+
+      <Link to="/recipe-list">
         <button>Detlete this recipe</button>
       </Link>
     </div>

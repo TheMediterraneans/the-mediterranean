@@ -71,7 +71,7 @@ function App() {
 };
 
   const editRecipe = (recipeId, updatedRecipe) => {
-  const db = getDatabase();
+  const db = database();
   const recipeRef = ref(db, `recipes/${recipeId}`);
 
   update(recipeRef, updatedRecipe)
@@ -103,7 +103,7 @@ const deleteRecipe = (recipeId) => {
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/create" element={<AddRecipe onCreate={createNewRecipe} />} />
         <Route path="/recipes/:recipeId" element={<RecipeDetails/>} />
-        <Route path="/recipes/:recipeId/edit" element={<EditRecipesLoggedUsers onEdit={editRecipe}/>} />
+        <Route path="/recipes/:recipeId/edit" element={<EditRecipesLoggedUsers recipe={recipes}onEdit={editRecipe}/>} />
         <Route path="/recipes/:recipeId" element={<RecipeDetails recipe={recipes} onDelete={deleteRecipe} />} />
       </Routes>
 
