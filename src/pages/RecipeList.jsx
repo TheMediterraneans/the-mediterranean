@@ -26,6 +26,10 @@ function RecipeList({ recipes, loading }) {
                   {recipe.description}
                 </p>
                 <p>Musical mood: {recipe.musicUrl}</p>
+                <button className="btn btn-primary btn-sm">
+                  View full recipe!
+                </button>
+
                 <div className="mt-auto card-actions justify-end"></div>
               </div>
             </div>
