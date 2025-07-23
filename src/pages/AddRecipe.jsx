@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { getDatabase, ref, push } from "firebase/database";
+
 
 function CreateRecipe({ onCreate }) {
   const [title, setTitle] = useState("");
@@ -48,6 +50,7 @@ function CreateRecipe({ onCreate }) {
     // Optional: reset form
     setTitle("");
     setDescription("");
+    setCategory("");
     setIngredients([{ name: "", quantity: "", unit: "" }]);
     setImageUrl("");
     setPrepTime(0);
@@ -72,8 +75,19 @@ function CreateRecipe({ onCreate }) {
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
       />
+
+      <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <option value="">Select category</option>
+        <option value="appetizer">Appetizer</option>
+        <option value="main-course">Main Course</option>
+        <option value="second-course">Second Course</option>
+        <option value="sides">Sides</option>
+        <option value="desserts">Desserts</option>
+        <option value="snacks">Snacks</option>
+      </select>
       {ingredients.map((ingredient, index) => (
         <div key={index}>
+          <label>Ingredients: 
           <input
             placeholder="Name"
             value={ingredient.name}
@@ -88,6 +102,7 @@ function CreateRecipe({ onCreate }) {
               handleIngredientChange(index, "quantity", e.target.value)
             }
           />
+          
           <input
             placeholder="Unit"
             value={ingredient.unit}
@@ -95,6 +110,7 @@ function CreateRecipe({ onCreate }) {
               handleIngredientChange(index, "unit", e.target.value)
             }
           />
+          </label>
         </div>
       ))}
       <button onClick={addIngredient}>Add Ingredient</button>
@@ -177,10 +193,18 @@ function CreateRecipe({ onCreate }) {
 }
 
 function AddRecipe() {
-  const handleCreate = (recipe) => {
-    // handle recipe creation logic here
-    console.log("Recipe created:", recipe);
+  const handleCreate = async (recipe) => {
+    try {
+      const db = getDatabase();
+      const recipesRef = ref(db, "recipes");
+      await push(recipesRef, recipe);
+      alert("Recipe created successfully!");
+    } catch (error) {
+      console.error("Error creating recipe:", error);
+      alert("Error creating recipe");
+    }
   };
+
 
   return <CreateRecipe onCreate={handleCreate} />;
 }
