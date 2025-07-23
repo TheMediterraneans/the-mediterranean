@@ -5,6 +5,7 @@ function Homepage({ recipes }) {
   const categories = recipes.map((recipe) => {
     return recipe.category;
   });
+
   // deduplicate the recipe categories in the new array
   const uniqueCategories = [];
   for (let category of categories) {
@@ -12,27 +13,76 @@ function Homepage({ recipes }) {
       uniqueCategories.push(category);
     }
   }
-  // uniqueCategories.push("all")
 
+  // Category to image mapping - you can customize these URLs or use local images
+  const categoryImages = {
+    "appetizers": "https://res.cloudinary.com/dr1xea5ry/image/upload/v1753282453/Cajun_Shrimp_Appetizer_Verticle_zkgl0z.jpg",
+    "sides": "https://res.cloudinary.com/dr1xea5ry/image/upload/v1753281990/Lobster-Salad-Lasarte-Review-Menu-2_281_of_1_29_rdwtts.jpg",
+    "second-course": "https://res.cloudinary.com/dr1xea5ry/image/upload/v1753282217/Tangelo_and_tarragon_stuffed_chicken_breasts_enx7z5.jpg",
+    "main-course": "https://res.cloudinary.com/dr1xea5ry/image/upload/v1753281808/90_ygdgip.jpg",
+    "desserts": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=400&fit=crop&crop=center",
+    "drinks": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&h=400&fit=crop&crop=center",
+    "breakfast": "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=400&fit=crop&crop=center",
+    "lunch": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop&crop=center",
+    "dinner": "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=400&fit=crop&crop=center",
+    "snacks": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?w=400&h=400&fit=crop&crop=center",
+    "salads": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop&crop=center",
+    "soups": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop&crop=center",
+    "pasta": "https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=400&h=400&fit=crop&crop=center",
+    "pizza": "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=400&fit=crop&crop=center",
+    "seafood": "https://images.unsplash.com/photo-1559181567-c3190ca9959b?w=400&h=400&fit=crop&crop=center",
+    "vegetarian": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop&crop=center",
+    "vegan": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=400&fit=crop&crop=center",
+    "gluten-free": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=400&fit=crop&crop=center",
+    // Default fallback image
+    "default": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=400&fit=crop&crop=center"
+  };
+
+  // Function to get image for category
+  const getCategoryImage = (category) => {
+    const normalizedCategory = category.toLowerCase();
+    return categoryImages[normalizedCategory] || categoryImages["default"];
+  };
+
+  // Function to capitalize category names nicely
+  const formatCategoryName = (category) => {
+    return category
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
 
   //return a link to recipe list page that triggers event to update state to match the category of the link
   function displayCategory(category, categoryName) {
+    const imageUrl = getCategoryImage(category);
+    
     return (
       <Link to={`/recipe-list/${category}`} key={category}>
-        <div
-          // onClick={() => setSelectedCategory(category)}
-          className="
-        bg-primary/50 text-primary-content
-        rounded-lg
-        aspect-square
-        w-full
-        flex items-center justify-center
-        p-6
-        cursor-pointer
-        transition-all duration-200
-        hover:bg-primary-focus hover:scale-105 hover:shadow-xl"
-        >
-          <span className="text- font-semibold">{categoryName}</span>
+        <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden">
+          {/* Image container */}
+          <figure className="aspect-square overflow-hidden">
+            <img 
+              src={imageUrl} 
+              alt={`${categoryName} category`}
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              onError={(e) => {
+                // Fallback if image fails to load
+                e.target.src = categoryImages["default"];
+              }}
+            />
+          </figure>
+          
+          {/* Category name overlay */}
+          <div className="card-body absolute inset-0 bg-black/40 flex items-end justify-center p-4">
+            <h3 className="card-title text-white text-center text-lg font-bold drop-shadow-lg">
+              {formatCategoryName(categoryName)}
+            </h3>
+          </div>
+          
+          {/* Optional: Badge for number of recipes in category */}
+          <div className="badge badge-primary badge-lg absolute top-4 right-4">
+            {recipes.filter(recipe => recipe.category === category).length}
+          </div>
         </div>
       </Link>
     );
@@ -41,17 +91,12 @@ function Homepage({ recipes }) {
   return (
     <div>
       <div className="w-screen min-h-screen bg-base-200">
-        {/* <div >
-              {displayCategory("", "all recipes")}
-              {uniqueCategories.map((category) => displayCategory(category, category))}
-            </div> */}
-
         <div className="flex justify-center">
           <div className="max-w-4xl mx-auto px-4 py-12 text-center">
-            <h1 className="max-w-5xl mx-auto px-4 text-center">
+            <h1 className="max-w-5xl mx-auto px-4 text-center text-4xl font-bold mb-4">
               Welcome to Foodlings
             </h1>
-            <p className="mb-6">
+            <p className="mb-8 text-lg text-base-content/70">
               Discover delicious recipes, find music to cook to and eat to!
             </p>
 
@@ -60,14 +105,13 @@ function Homepage({ recipes }) {
                 grid-cols-1 
                 md:grid-cols-2 
                 lg:grid-cols-3 
-                gap-y-12
-                gap-x-16
+                gap-6
                 w-full 
-                max-w-screen-xl
-                mx-auto
+                max-w-screen-xl 
+                mx-auto 
                 px-4"
             >
-              {uniqueCategories.map((category) => 
+              {uniqueCategories.map((category) =>
                 displayCategory(category, category)
               )}
             </div>

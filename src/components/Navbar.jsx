@@ -9,7 +9,6 @@ function Navbar() {
           <Link to="/" className="normal-case text-4xl flex items-center">
             <Cookie className="w-8 h-8 mr-2 text-primary" />
             Foodlings
-          
           </Link>
           <ul className="menu menu-horizontal px-1 ml-5">
             <li>
@@ -19,10 +18,12 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <a className="flex items-center">
-                <Music className="w-5 h-5 mr-2" />
-                Music
-              </a>
+              <Link to="/playlist">
+                <a className="flex items-center">
+                  <Music className="w-5 h-5 mr-2" />
+                  Music
+                </a>
+              </Link>
             </li>
             {/* Maybe only render this for logged in users? */}
             {/* <li>

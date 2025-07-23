@@ -105,7 +105,10 @@ const deleteRecipe = (recipeId) => {
         <Route path="/recipes/:recipeId" element={<RecipeDetails/>} />
         <Route path="/recipes/:recipeId/edit" element={<EditRecipesLoggedUsers recipe={recipes}onEdit={editRecipe}/>} />
         <Route path="/recipes/:recipeId" element={<RecipeDetails recipe={recipes} onDelete={deleteRecipe} />} />
+        <Route path="/playlist" element={<Playlist/>} />
       </Routes>
+
+      <Footer/>
 
       
     </>
