@@ -31,7 +31,12 @@ function RecipeList({ recipes, loading }) {
                   <p className="mt-2 text-secondary-content">
                     {recipe.description}
                   </p>
-                  <p>Musical mood: {recipe.musicUrl}</p>
+                  <p>
+          🎵{" "}
+          <a href={recipe.musicUrl} target="_blank" rel="noreferrer">
+            Cooking Mood
+          </a>
+        </p>
                   <button className="btn btn-primary btn-sm">
                     View full recipe!
                   </button>

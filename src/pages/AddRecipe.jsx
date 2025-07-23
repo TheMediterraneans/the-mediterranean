@@ -180,7 +180,7 @@ function CreateRecipe({ onCreate }) {
       </label>
 
       <label>
-        Notes:
+        Diary  Notes:
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}

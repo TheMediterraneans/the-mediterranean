@@ -75,14 +75,35 @@ const EditRecipe = ({ recipe, onEdit }) => {
         </div>
       ))}
       <button onClick={addIngredient}>Add Ingredient</button>
+      <label>You can add a new image if you wish :) 
       <input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} placeholder="Image URL" />
+      </label>
+
+      <label>Preparation time: 
       <input value={prepTime} onChange={(e) => setPrepTime(e.target.value)} placeholder="Prep Time" type="number" />
+      </label>
+
+      <label>Servings: 
       <input value={servings} onChange={(e) => setServings(e.target.value)} placeholder="Servings" type="number" />
+      </label>
+
+      <label>Tags: 
       <input value={tags} onChange={(e) => setTags(e.target.value)} placeholder="Tags (comma-separated)" />
+      </label>
+
       <input value={mood} onChange={(e) => setMood(e.target.value)} placeholder="Mood" />
+
+      <label>Share your Mood: 
       <textarea value={preparationSteps} onChange={(e) => setPreparationSteps(e.target.value)} placeholder="Preparation Steps" />
+      </label>
+
+      <label>Which music do you think is better for this recipe?
       <input value={musicUrl} onChange={(e) => setMusicUrl(e.target.value)} placeholder="Music URL" />
+      </label>
+
+      <label>Add your personal touch with your notes! 
       <textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Notes" />
+      </label>
       <button onClick={handleSubmit}>Save Changes</button>
     </div>
   );
