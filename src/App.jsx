@@ -22,7 +22,6 @@ function App() {
 
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   useEffect(() => {
     const getRecipesList = async () => {
@@ -98,9 +97,9 @@ const deleteRecipe = (recipeId) => {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Homepage recipes={recipes} setSelectedCategory={setSelectedCategory}/>} />
-        <Route path="/recipe-list" element={<RecipeList recipes={recipes} category ={selectedCategory} loading={loading} />} />
-        {/* <Route path="/recipe-list/:category?" element={<RecipeList />} /> */}
+        <Route path="/" element={<Homepage recipes={recipes} />} />
+        {/* <Route path="/recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} /> */}
+        <Route path="/recipe-list/:category?" element={<RecipeList recipes={recipes} laoding={loading} />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/create" element={<AddRecipe onCreate={createNewRecipe} />} />
         <Route path="/recipes/:recipeId" element={<RecipeDetails/>} />

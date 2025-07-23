@@ -1,27 +1,22 @@
-import { Link } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
 import DifficultyBadge from "../components/DifficultyBadge";
-import { useParams } from "react-router-dom";
-
-function RecipeList({ recipes, category, loading }) {
-
-  const filteredRecipes =
-    category === "" ? recipes : recipes.filter((recipe) => {
-      return recipe.category === category;
-    });
-
-    // const { category } = useParams();
-
 
 function RecipeList({ recipes, loading }) {
+  const { category } = useParams();
 
+  const filteredRecipes =
+    category === "all"
+      ? recipes
+      : recipes.filter((recipe) => {
+          return recipe.category === category;
+        });
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <div>
       <Link to="/create">
-        <button>Create a new recipen</button>
+        <button>Create a new recipe</button>
       </Link>
 
       <div className="container mx-auto px-6 py-8">
@@ -30,13 +25,13 @@ function RecipeList({ recipes, loading }) {
             <li key={recipe.id} className="list-row">
               <div
                 className="card w-full max-w-4xl mx-auto
-            bg-base-100 border-2 border-warning
-            rounded-2xl shadow-md
-            hover:shadow-xl hover:scale-[1.02]
-            transition duration-200 overflow-hidden"
+                bg-base-100 border-2 border-warning
+                rounded-2xl shadow-md
+                hover:shadow-xl hover:scale-[1.02]
+                transition duration-200 overflow-hidden"
               >
                 {/* <div className="w-full h-1 bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-600" /> */}
-                <div key={recipe.id} className="card-body flex flex-col">
+                <div className="card-body flex flex-col">
                   <h2 className="card-title text-2xl">{recipe.title}</h2>
                   <p>Category: {recipe.category}</p>
                   <div className="mt-2">
@@ -56,8 +51,6 @@ function RecipeList({ recipes, loading }) {
                       View full recipe!
                     </button>
                   </Link>
-
-                  <div className="mt-auto card-actions justify-end"></div>
                 </div>
               </div>
             </li>
