@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { getDatabase, ref, push } from "firebase/database";
-
+import { Link } from "react-router-dom";
 
 function CreateRecipe({ onCreate }) {
   const [title, setTitle] = useState("");
@@ -64,7 +64,12 @@ function CreateRecipe({ onCreate }) {
 
   return (
     <div>
-      <h2>Create a New Recipe</h2>
+      <h1>Create a New Recipe</h1>
+      <div style={{ marginTop: "20px" }}>
+        <Link to="/recipe-list">
+          <button style={{ marginRight: "10px" }}>Back to Recipes</button>
+        </Link>
+      </div>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
@@ -87,29 +92,29 @@ function CreateRecipe({ onCreate }) {
       </select>
       {ingredients.map((ingredient, index) => (
         <div key={index}>
-          <label>Ingredients: 
-          <input
-            placeholder="Name"
-            value={ingredient.name}
-            onChange={(e) =>
-              handleIngredientChange(index, "name", e.target.value)
-            }
-          />
-          <input
-            placeholder="Quantity"
-            value={ingredient.quantity}
-            onChange={(e) =>
-              handleIngredientChange(index, "quantity", e.target.value)
-            }
-          />
-          
-          <input
-            placeholder="Unit"
-            value={ingredient.unit}
-            onChange={(e) =>
-              handleIngredientChange(index, "unit", e.target.value)
-            }
-          />
+          <label>
+            Ingredients:
+            <input
+              placeholder="Name"
+              value={ingredient.name}
+              onChange={(e) =>
+                handleIngredientChange(index, "name", e.target.value)
+              }
+            />
+            <input
+              placeholder="Quantity"
+              value={ingredient.quantity}
+              onChange={(e) =>
+                handleIngredientChange(index, "quantity", e.target.value)
+              }
+            />
+            <input
+              placeholder="Unit"
+              value={ingredient.unit}
+              onChange={(e) =>
+                handleIngredientChange(index, "unit", e.target.value)
+              }
+            />
           </label>
         </div>
       ))}
@@ -180,7 +185,7 @@ function CreateRecipe({ onCreate }) {
       </label>
 
       <label>
-        Diary  Notes:
+        Diary Notes:
         <textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
@@ -204,7 +209,6 @@ function AddRecipe() {
       alert("Error creating recipe");
     }
   };
-
 
   return <CreateRecipe onCreate={handleCreate} />;
 }

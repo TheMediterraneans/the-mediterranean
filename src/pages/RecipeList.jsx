@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+
 import DifficultyBadge from "../components/DifficultyBadge";
 
 function RecipeList({ recipes, loading }) {
+
+
   if (loading) return <p>Loading...</p>;
 
   return (
@@ -9,6 +12,11 @@ function RecipeList({ recipes, loading }) {
       <Link to="/create">
         <button>Create a new recipen</button>
       </Link>
+      <div style={{ marginTop: "50px" }}>
+        <Link to="/">
+          <button style={{ marginRight: "10px" }}>Back to Home</button>
+        </Link>
+      </div>
 
       <div className="container mx-auto px-6 py-8">
         <ul className="list-row space-y-8">
@@ -32,14 +40,16 @@ function RecipeList({ recipes, loading }) {
                     {recipe.description}
                   </p>
                   <p>
-          🎵{" "}
-          <a href={recipe.musicUrl} target="_blank" rel="noreferrer">
-            Cooking Mood
-          </a>
-        </p>
-                  <button className="btn btn-primary btn-sm">
-                    View full recipe!
-                  </button>
+                    🎵{" "}
+                    <a href={recipe.musicUrl} target="_blank" rel="noreferrer">
+                      Cooking Mood
+                    </a>
+                  </p>
+                  <Link to={`/recipes/${recipe.id}`}>
+                    <button className="btn btn-primary btn-sm">
+                      View full recipe!
+                    </button>
+                  </Link>
 
                   <div className="mt-auto card-actions justify-end"></div>
                 </div>

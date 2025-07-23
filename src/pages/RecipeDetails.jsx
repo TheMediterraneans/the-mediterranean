@@ -167,7 +167,7 @@ function RecipeDetails() {
         </p>
       )}
 
-      {/* Action buttons */}
+      
       <div style={{ marginTop: "20px" }}>
         <Link to="/recipe-list">
           <button style={{ marginRight: "10px" }}>Back to Recipes</button>
