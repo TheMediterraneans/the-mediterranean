@@ -1,21 +1,26 @@
 import { Link } from "react-router-dom";
 import DifficultyBadge from "../components/DifficultyBadge";
+import { useParams } from "react-router-dom";
 
-function RecipeList({ recipes, loading }) {
+function RecipeList({ recipes, category, loading }) {
+
+  const filteredRecipes =
+    category === "" ? recipes : recipes.filter((recipe) => {
+      return recipe.category === category;
+    });
+
+    // const { category } = useParams();
+
+
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
-      <Link to="/create">
-        <button>Create a new recipen</button>
-      </Link>
-
-      <div className="container mx-auto px-6 py-8">
-        <ul className="list-row space-y-8">
-          {recipes.map((recipe) => (
-            <li key={recipe.id} className="list-row">
-              <div
-                className="card w-full max-w-4xl mx-auto
+    <div className="container mx-auto px-6 py-8">
+      <ul className="list-row space-y-8">
+        {filteredRecipes.map((recipe) => (
+          <li key={recipe.id} className="list-row">
+            <div
+              className="card w-full max-w-4xl mx-auto
             bg-base-100 border-2 border-warning
             rounded-2xl shadow-md
             hover:shadow-xl hover:scale-[1.02]
