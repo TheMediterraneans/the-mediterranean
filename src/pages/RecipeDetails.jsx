@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EditRecipe from "../components/EditRecipe";
 import SpotifyEmbed from "../components/SpotifyEmbed";
+import { getPlaylistForRecipe } from "../utils/playlistUtils";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
@@ -232,7 +233,7 @@ function RecipeDetails() {
             )}
           </div>
 
-          {recipe.musicUrl && (
+                    {recipe.musicUrl && (
             <div className="bg-base-200 p-3 rounded mb-4">
               <a
                 href={recipe.musicUrl}
@@ -240,21 +241,19 @@ function RecipeDetails() {
                 rel="noreferrer"
                 className="btn bg-gray-300 flex items-center gap-2 text-green-500 text-lg"
               >
-                🎵 Your Music Recommendation
+                🎵 Your Music Reccommendation
               </a>
             </div>
           )}
 
-          {recipe.musicUrl && (
-            <div className="mb-4">
-              <h3 className="text-lg font-bold mb-2 text-base-content">
-                🎵 Our Music Recommendation
-              </h3>
-              <div className="bg-base-200 p-3 rounded">
-                <SpotifyEmbed url={recipe.musicUrl} />
-              </div>
+          <div className="mb-4">
+            <h3 className="text-lg font-bold mb-2 text-base-content">
+              🎵 Our Music Reccommendation
+            </h3>
+            <div className="bg-base-200 p-3 rounded">
+              <SpotifyEmbed url={getPlaylistForRecipe(recipeId)} />
             </div>
-          )}
+          </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-2 mb-6">

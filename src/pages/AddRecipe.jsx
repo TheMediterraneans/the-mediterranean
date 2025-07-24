@@ -422,7 +422,7 @@ function CreateRecipe({ onCreate }) {
             <button 
               className={`btn btn-wide gap-2 ${
                 isFormValid() 
-                  ? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500' 
+                  ? 'action-button' 
                   : 'btn-disabled'
               }`}
               onClick={handleSubmit}

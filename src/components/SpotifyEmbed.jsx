@@ -1,14 +1,13 @@
-function SpotifyEmbed() {
+function SpotifyEmbed({ url }) {
 
-    const dummyUrl = "https://open.spotify.com/embed/playlist/37i9dQZF1DWYtQSOiZF6hj?utm_source=generator";
 
     return (
         <div className="w-full max-w-md mx-auto">
-            {dummyUrl ? (
+            {url ? (
                 // the style below is important, it hides the weird white corners of Spotify's iframe
                 <div className="mx-auto" style={{ borderRadius: "25px", overflow: "hidden" }} >
                     <iframe
-                        src={dummyUrl}
+                        src={url}
                         width="100%"
                         height="512"
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
