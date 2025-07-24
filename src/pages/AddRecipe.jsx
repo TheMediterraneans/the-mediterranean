@@ -20,7 +20,7 @@ function CreateRecipe({ onCreate }) {
   const [notes, setNotes] = useState("");
   const [errors, setErrors] = useState({});
 
-  // Required fields configuration
+  
   const requiredFields = {
     title: "Recipe title is required",
     description: "Description is required", 
@@ -28,7 +28,6 @@ function CreateRecipe({ onCreate }) {
     preparationSteps: "Preparation steps are required"
   };
 
-  // Validation function for individual fields
   const validateField = (fieldName, value) => {
     const newErrors = { ...errors };
     
@@ -38,7 +37,6 @@ function CreateRecipe({ onCreate }) {
       delete newErrors[fieldName];
     }
     
-    // Special validation for numeric fields
     if (fieldName === 'prepTime' && (value <= 0 || isNaN(value))) {
       newErrors[fieldName] = "Prep time must be a number greater than 0";
     } else if (fieldName === 'prepTime' && value > 0) {
@@ -54,7 +52,6 @@ function CreateRecipe({ onCreate }) {
     setErrors(newErrors);
   };
 
-  // Validate ingredients
   const validateIngredients = () => {
     const validIngredients = ingredients.filter(
       ing => ing.name.trim() && ing.quantity.trim()

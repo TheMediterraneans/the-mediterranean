@@ -33,7 +33,6 @@ body {
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  /* AGGIUNTO: Padding per compensare la navbar fixed */
   padding-top: 64px;
 }
 
@@ -68,7 +67,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* AGGIUNTO: Stili specifici per la navbar e il contenuto */
+
 .navbar-fixed {
   position: fixed;
   top: 0;
@@ -77,24 +76,21 @@ button:focus-visible {
   z-index: 1000;
 }
 
-/* Alternativa: Se preferisci applicare il padding solo ai contenitori principali */
 .main-content {
   padding-top: 64px;
 }
 
-/* Per essere ancora più precisi, puoi usare questa regola */
 .w-screen {
-  margin-top: 0; /* Reset eventuale margin */
+  margin-top: 0;
 }
 
-/* Assicurati che la navbar non interferisca con elementi sticky */
+
 .sticky {
   top: 64px;
 }
 
-/* Media query per dispositivi più piccoli dove la navbar potrebbe essere diversa */
 @media (max-width: 768px) {
   body {
-    padding-top: 64px; /* Mantieni lo stesso valore per coerenza */
+    padding-top: 64px;
   }
 }
