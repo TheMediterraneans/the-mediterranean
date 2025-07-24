@@ -73,7 +73,7 @@ function Homepage({ recipes }) {
           
           <div className="card-body absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex items-center justify-center p-6">
             <div className="text-center">
-              <h3 className="text-white mt-10 text-2xl font-extrabold drop-shadow-2xl tracking-wider uppercase mb-2 transform transition-transform duration-300 hover:scale-105">
+              <h3 className="text-white mt-10 text-2xl font-extrabold drop-shadow-2xl tracking-wider uppercase mb-2 transform transition-transform duration-300 hover:scale-105" style={{color:"white"}}>
                 {formatCategoryName(categoryName)}
               </h3>
               <div className="w-16 h-0.5 bg-white/80 mx-auto rounded-full"></div>
@@ -93,10 +93,10 @@ function Homepage({ recipes }) {
       <div className="w-screen">
         <div className="flex justify-center">
           <div className="max-w-4xl mx-auto px-4 py-12 text-center">
-            <h1 className="max-w-5xl mx-auto px-4 text-center text-4xl font-bold mb-4">
+            <h1 className="max-w-5xl mx-auto px-4 text-center text-4xl font-bold mb-4" className="home-title">
               Welcome to Foodlings
             </h1>
-            <p className="mb-8 text-lg text-base-content/70">
+            <p className="mb-8 text-lg text-base-content/70" id="home-text">
               Discover delicious recipes, find music to cook to and eat to!
             </p>
 

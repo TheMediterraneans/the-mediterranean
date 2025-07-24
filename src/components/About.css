@@ -1,0 +1,42 @@
+.about-container {
+  padding: 3rem 2rem;
+  max-width: 800px;
+  background-color: #fdfcf8;
+  color: #2e4639;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  margin: 50px;
+}
+
+.quote {
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #3f5f4a;
+  margin-bottom: 2rem;
+  white-space: pre-line;
+}
+
+.quote cite {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #7c9473;
+}
+
+#about-title {
+  margin-top: 2rem;
+  margin-left: 100px;
+  color: #385e49;
+  font-size: 1.8rem;
+  border-bottom: 2px solid #d4e8cf;
+  padding-bottom: 0.3rem;
+}
+
+.project-description {
+  margin-top: 1rem;
+  font-size: 1rem;
+  background: #f4f7f0;
+  padding: 1.5rem;
+  border-left: 4px solid #d0e3bd;
+  border-radius: 8px;
+}

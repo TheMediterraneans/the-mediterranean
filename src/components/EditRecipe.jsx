@@ -29,7 +29,20 @@ const EditRecipe = ({ recipe, onEdit }) => {
     if (recipe) {
       setTitle(recipe.title || '');
       setDescription(recipe.description || '');
-      setIngredients(recipe.ingredients || [{ name: "", quantity: "", unit: "" }]);
+      
+      // Fix: Ensure ingredients have string values and proper structure
+      const processedIngredients = (recipe.ingredients || []).map(ingredient => ({
+        name: String(ingredient.name || ''),
+        quantity: String(ingredient.quantity || ''), // Convert to string
+        unit: String(ingredient.unit || '')
+      }));
+      
+      // Ensure at least one ingredient row exists
+      if (processedIngredients.length === 0) {
+        processedIngredients.push({ name: "", quantity: "", unit: "" });
+      }
+      
+      setIngredients(processedIngredients);
       setImageUrl(recipe.imageUrl || '');
       setCategory(recipe.category || '');
       setPrepTime(recipe.prepTime || 0);
@@ -49,7 +62,7 @@ const EditRecipe = ({ recipe, onEdit }) => {
   const validateField = (fieldName, value) => {
     const newErrors = { ...errors };
     
-    if (requiredFields[fieldName] && !value.trim()) {
+    if (requiredFields[fieldName] && !String(value).trim()) {
       newErrors[fieldName] = requiredFields[fieldName];
     } else {
       delete newErrors[fieldName];
@@ -71,10 +84,10 @@ const EditRecipe = ({ recipe, onEdit }) => {
     setErrors(newErrors);
   };
 
-  // Validate ingredients
+  // Validate ingredients - Fix: Convert to string before calling trim()
   const validateIngredients = () => {
     const validIngredients = ingredients.filter(
-      ing => ing.name.trim() && ing.quantity.trim()
+      ing => String(ing.name || '').trim() && String(ing.quantity || '').trim()
     );
     
     const newErrors = { ...errors };
@@ -127,7 +140,7 @@ const EditRecipe = ({ recipe, onEdit }) => {
 
   const handleIngredientChange = (index, field, value) => {
     const updated = [...ingredients];
-    updated[index][field] = value;
+    updated[index][field] = String(value); // Ensure it's always a string
     setIngredients(updated);
     
     // Validate ingredients after change
@@ -146,11 +159,11 @@ const EditRecipe = ({ recipe, onEdit }) => {
     }
   };
 
-  // Check if form is valid
+  // Check if form is valid - Fix: Convert to string before trim()
   const isFormValid = () => {
-    const hasRequiredFields = title.trim() && description.trim() && category && preparationSteps.trim();
+    const hasRequiredFields = String(title).trim() && String(description).trim() && category && String(preparationSteps).trim();
     const hasValidNumbers = prepTime > 0 && servings > 0;
-    const hasValidIngredients = ingredients.some(ing => ing.name.trim() && ing.quantity.trim());
+    const hasValidIngredients = ingredients.some(ing => String(ing.name || '').trim() && String(ing.quantity || '').trim());
     const hasNoErrors = Object.keys(errors).length === 0;
     
     return hasRequiredFields && hasValidNumbers && hasValidIngredients && hasNoErrors;
@@ -171,20 +184,29 @@ const EditRecipe = ({ recipe, onEdit }) => {
       return;
     }
 
+    // Fix: Ensure ingredients are properly filtered and processed
+    const processedIngredients = ingredients
+      .filter(ing => String(ing.name || '').trim()) // Filter out empty ingredients
+      .map(ing => ({
+        name: String(ing.name || '').trim(),
+        quantity: String(ing.quantity || '').trim(),
+        unit: String(ing.unit || '').trim()
+      }));
+
     const updatedRecipe = {
-      title,
-      description,
+      title: String(title).trim(),
+      description: String(description).trim(),
       category,
       difficulty: recipe.difficulty || 'easy',
-      imageUrl,
-      ingredients: ingredients.filter(ing => ing.name.trim()),
-      mood,
-      musicUrl,
-      notes,
+      imageUrl: String(imageUrl).trim(),
+      ingredients: processedIngredients,
+      mood: String(mood).trim(),
+      musicUrl: String(musicUrl).trim(),
+      notes: String(notes).trim(),
       prepTime: Number(prepTime),
-      preparationSteps,
+      preparationSteps: String(preparationSteps).trim(),
       servings: Number(servings),
-      tags: tags.split(',').map(tag => tag.trim()).filter(tag => tag),
+      tags: String(tags).split(',').map(tag => tag.trim()).filter(tag => tag),
     };
 
     onEdit(recipe.id, updatedRecipe);
@@ -194,12 +216,12 @@ const EditRecipe = ({ recipe, onEdit }) => {
     <div className="w-screen bg-base-200 pt-16">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-base-content mb-2">Edit Recipe: {recipe.title}</h1>
+          <h1 className="text-2xl font-bold text-base-content mb-2" className="edit-recipe-title">Edit Recipe: {recipe?.title}</h1>
           <p className="text-sm text-base-content/70">Fields marked with <span className="text-error">*</span> are required</p>
         </div>
         
         <div className="space-y-6">
-          {/* Basic Information */}
+          
           <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-lg font-bold text-base-content mb-4">Basic Information</h3>
             <div className="space-y-4">
@@ -365,7 +387,7 @@ const EditRecipe = ({ recipe, onEdit }) => {
                   />
                   {ingredients.length > 1 && (
                     <button 
-                      className="btn btn-error btn-sm"
+                      className="btn btn-error btn-sm" className="delete-button-style"
                       onClick={() => removeIngredient(index)}
                     >
                       ✕
@@ -374,7 +396,7 @@ const EditRecipe = ({ recipe, onEdit }) => {
                 </div>
               ))}
               <button
-                className="btn btn-outline btn-sm gap-2"
+                className="btn btn-outline btn-sm gap-2" className="action-button"
                 onClick={addIngredient}
               >
                 <span className="text-lg">+</span>

@@ -125,7 +125,7 @@ function RecipeDetails() {
     <div className="w-screen bg-base-200">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-base-content mb-2">
+          <h1 className="text-2xl font-bold text-base-content mb-2" className="home-title">
             {recipe.title}
           </h1>
         </div>
@@ -259,21 +259,21 @@ function RecipeDetails() {
 
         <div className="flex flex-wrap justify-center gap-2 mb-6">
           <Link to="/recipe-list/all">
-            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500">
+            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500" style={{backgroundColor: "grey", color:"yellow"}}>
               ← Back to Recipes
             </button>
           </Link>
 
           <button
             onClick={() => setIsEditing(true)}
-            className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500"
+            className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500" style={{backgroundColor:"#557D20", color:"yellow"}}
           >
             Edit Recipe
           </button>
 
           <button
             onClick={handleDelete}
-            className="btn bg-red-500 hover:bg-red-600 text-white border-red-500"
+            className="btn bg-red-500 hover:bg-red-600 text-white border-red-500" style={{backgroundColor:"orangered"}}
           >
             Delete Recipe
           </button>

@@ -26,10 +26,12 @@ function Navbar() {
               </Link>
             </li>
             <li>
+              <Link to="/about">
               <a className="flex items-center">
                 <Info className="w-5 h-5 mr-2" />
                 About
               </a>
+              </Link>
             </li>
           </ul>
         </div>

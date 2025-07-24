@@ -51,7 +51,7 @@ function EditRecipesLoggedUsers({ onEdit }) {
 
   return (
     <div>
-      <h2>Edit Recipe</h2>
+      <h2 className="edit-recipe-title">Edit Recipe</h2>
       <EditRecipe recipe={recipe} onEdit={handleEdit} />
     </div>
   );
