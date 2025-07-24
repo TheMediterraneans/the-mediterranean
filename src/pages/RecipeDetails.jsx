@@ -106,11 +106,11 @@ function RecipeDetails() {
       <div>
         <EditRecipe recipe={{ id: recipeId, ...recipe }} onEdit={handleEdit} />
         <div className="w-screen bg-base-200">
-          <div className="max-w-4xl mx-auto px-4 py-8">
-            <div className="flex justify-center">
+          <div className="max-w-4xl mx-auto px-4 py-1">
+            <div className="flex justify-center mb-20">
               <button
                 onClick={() => setIsEditing(false)}
-                className="btn btn-ghost text-base-content"
+                className="btn bg-gray-500 hover:bg-gray-600 text-white border-blue-500"
               >
                 Cancel
               </button>
@@ -125,7 +125,7 @@ function RecipeDetails() {
     <div className="w-screen bg-base-200">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-base-content mb-2" className="home-title">
+          <h1 className="text-2xl font-bold text-base-content mb-2 home-title">
             {recipe.title}
           </h1>
         </div>
@@ -238,9 +238,9 @@ function RecipeDetails() {
                 href={recipe.musicUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-accent btn-sm flex items-center gap-2"
+                className="btn bg-gray-300 flex items-center gap-2 text-green-500 text-lg"
               >
-                🎵 Your Music Reccommendation
+                🎵 Your Music Recommendation
               </a>
             </div>
           )}
@@ -248,7 +248,7 @@ function RecipeDetails() {
           {recipe.musicUrl && (
             <div className="mb-4">
               <h3 className="text-lg font-bold mb-2 text-base-content">
-                🎵 Our Music Reccommendation
+                🎵 Our Music Recommendation
               </h3>
               <div className="bg-base-200 p-3 rounded">
                 <SpotifyEmbed url={recipe.musicUrl} />
@@ -259,21 +259,23 @@ function RecipeDetails() {
 
         <div className="flex flex-wrap justify-center gap-2 mb-6">
           <Link to="/recipe-list/all">
-            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500" style={{backgroundColor: "grey", color:"yellow"}}>
+            <button className="btn bg-gray-500 hover:bg-gray-600 text-white border-blue-500">
               ← Back to Recipes
             </button>
           </Link>
 
           <button
             onClick={() => setIsEditing(true)}
-            className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500" style={{backgroundColor:"#557D20", color:"yellow"}}
+            className="btn action-button"
+            // style={{ backgroundColor: "#557D20", color: "yellow" }}
           >
             Edit Recipe
           </button>
 
           <button
             onClick={handleDelete}
-            className="btn bg-red-500 hover:bg-red-600 text-white border-red-500" style={{backgroundColor:"orangered"}}
+            className="btn bg-orange-600 hover:bg-orange-800 text-white border-blue-500"
+            // style={{ backgroundColor: "orangered" }}
           >
             Delete Recipe
           </button>

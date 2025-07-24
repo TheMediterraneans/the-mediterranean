@@ -80,7 +80,7 @@ function Homepage({ recipes }) {
             </div>
           </div>
           
-          <div className="badge bg-blue-500 text-white border-blue-500 badge-lg absolute top-3 right-3 shadow-md">
+          <div className="badge bg-yellow-400 text-white border-b-yellow-300 badge-lg absolute top-3 right-3 shadow-md">
             {recipes.filter(recipe => recipe.category === category).length}
           </div>
         </div>
@@ -93,7 +93,7 @@ function Homepage({ recipes }) {
       <div className="w-screen">
         <div className="flex justify-center">
           <div className="max-w-4xl mx-auto px-4 py-12 text-center">
-            <h1 className="max-w-5xl mx-auto px-4 text-center text-4xl font-bold mb-4" className="home-title">
+            <h1 className="max-w-5xl mx-auto px-4 text-center text-4xl font-bold mb-4 home-title">
               Welcome to Foodlings
             </h1>
             <p className="mb-8 text-lg text-base-content/70" id="home-text">

@@ -13,17 +13,17 @@ function RecipeList({ recipes, loading }) {
         return recipe.category === category;
       });
 
-  if (loading) return <div className="w-screen"><div className="max-w-4xl mx-auto px-4 py-8 flex items-center justify-center"><div className="text-base-content">Loading recipes... ⏳</div></div></div>;
+  if (loading) return <div className="w-screen min-h-screen"><div className="max-w-4xl mx-auto px-4 py-8 flex items-center justify-center"><div className="text-base-content">Loading recipes... ⏳</div></div></div>;
 
   return (
-    <div className="w-screen">
+    <div className="w-screen min-h-screen">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-base-content mb-6" className="home-title">
+          <h1 className="text-3xl font-bold text-base-content mb-6 home-title">
             {category === "all" ? "All Recipes" : `${category.charAt(0).toUpperCase() + category.slice(1)} Recipes`}
           </h1>
           <Link to="/create">
-            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500 btn-wide gap-2" className="action-button">
+            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500 btn-wide gap-2 action-button">
               <span className="text-lg">+</span>
               Create New Recipe
             </button>
@@ -62,7 +62,7 @@ function RecipeList({ recipes, loading }) {
                         </a>
                       </div>
                       <Link to={`/recipes/${recipe.id}`}>
-                        <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500 btn-sm normal-case gap-1" className="button-view">
+                        <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500 btn-sm normal-case gap-1 button-view">
                           View Recipe
                           <span className="text-xs">→</span>
                         </button>

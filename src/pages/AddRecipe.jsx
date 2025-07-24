@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { getDatabase, ref, push } from "firebase/database";
 import { Link } from "react-router-dom";
@@ -20,7 +19,6 @@ function CreateRecipe({ onCreate }) {
   const [notes, setNotes] = useState("");
   const [errors, setErrors] = useState({});
 
-  
   const requiredFields = {
     title: "Recipe title is required",
     description: "Description is required", 
@@ -104,8 +102,6 @@ function CreateRecipe({ onCreate }) {
     validateField('servings', value);
   };
 
-
-
   const handleIngredientChange = (index, field, value) => {
     const updated = [...ingredients];
     updated[index][field] = value;
@@ -136,7 +132,6 @@ function CreateRecipe({ onCreate }) {
   };
 
   const handleSubmit = () => {
-
     validateField('title', title);
     validateField('description', description);
     validateField('category', category);
@@ -167,7 +162,6 @@ function CreateRecipe({ onCreate }) {
 
     onCreate(newRecipe);
 
-    
     setTitle("");
     setDescription("");
     setCategory("");
@@ -184,7 +178,7 @@ function CreateRecipe({ onCreate }) {
   };
 
   return (
-    <div className="w-screen bg-base-200">
+    <div className="w-screen bg-base-200 pt-16">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-bold text-base-content mb-2">Create a New Recipe</h1>
@@ -192,14 +186,13 @@ function CreateRecipe({ onCreate }) {
         
         <div className="mb-6 text-center">
           <Link to="/recipe-list/all">
-            <button className="btn bg-gray-200 hover:bg-gray-300 text-gray-800 border-gray-300">
+            <button className="btn bg-gray-500 hover:bg-gray-600 text-white border-blue-500">  
               ← Back to Recipes
             </button>
           </Link>
         </div>
 
         <div className="space-y-6">
-          
           <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-lg font-bold text-base-content mb-4">Basic Information</h3>
             <div className="space-y-4">
@@ -253,7 +246,6 @@ function CreateRecipe({ onCreate }) {
                   <option value="sides">Sides</option>
                   <option value="desserts">Desserts</option>
                   <option value="snacks">Snacks</option>
-                  
                 </select>
                 {errors.category && (
                   <div className="label">
@@ -316,7 +308,6 @@ function CreateRecipe({ onCreate }) {
             </div>
           </div>
 
-          
           <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-lg font-bold text-base-content mb-4">Ingredients</h3>
             <div className="space-y-3">
@@ -371,7 +362,6 @@ function CreateRecipe({ onCreate }) {
             </div>
           </div>
 
-          
           <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-lg font-bold text-base-content mb-4">Preparation Steps</h3>
             <textarea
@@ -387,7 +377,6 @@ function CreateRecipe({ onCreate }) {
             )}
           </div>
 
-          
           <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-lg font-bold text-base-content mb-4">Additional Information</h3>
             <div className="space-y-4">
@@ -429,8 +418,7 @@ function CreateRecipe({ onCreate }) {
             </div>
           </div>
 
-          
-          <div className="text-center">
+          <div className="text-center mb-20">
             <button 
               className={`btn btn-wide gap-2 ${
                 isFormValid() 
@@ -455,10 +443,8 @@ function CreateRecipe({ onCreate }) {
   );
 }
 
-
 function AddRecipe() {
   const handleCreate = async (recipe) => {
-    
     try {
       const db = getDatabase();
       const recipesRef = ref(db, "recipes");

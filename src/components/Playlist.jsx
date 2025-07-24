@@ -1,11 +1,11 @@
 function Playlist() {
   return (
 
-    <div className="min-h-screen bg-base-200 p-6" id="playlistPage">
-      <div className="max-w-6xl mx-auto">
+    <div className="w-screen bg-base-200 pt-16" style={{height: 'calc(100vh - 144px)'}} id="playlistPage">
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4" className="home-title">🎶 Playlist For Your Mood</h1>
+          <h1 className="text-4xl font-bold mb-4 home-title">🎶 Playlist For Your Mood</h1>
           <h2 className="text-lg text-base-content/70 max-w-2xl mx-auto"><i>
             Each moment of your life and day has a playlist, look out our selection
             to listen while cooking, dining, discussing with the persons of your
@@ -23,7 +23,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/37i9dQZF1EIgLa2MeumXju?si=ajsdrgUhRkSrSzy-SNkoIQ"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Romantic Dinner
               </a>
@@ -37,7 +37,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/37i9dQZF1DWYBO1MoTDhZI?si=XStdkccQQZiIH0fnFXT2uQ"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Good vibes
               </a>
@@ -51,7 +51,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/37i9dQZF1DWYtQSOiZF6hj?si=MGiuToVDSLqp7PMyDFpzUw"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Happy birthday
               </a>
@@ -65,7 +65,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/37i9dQZF1EIhxsZ1zwdwMW?si=91CGfL43Q6u74-MLSn6e1Q"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Good morning
               </a>
@@ -79,7 +79,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/42eLtt8RUBboyXLmNQWU5a?si=0lGl5jaLTJOL1MTDjmiRmw"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Chill
               </a>
@@ -93,7 +93,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/37i9dQZF1EIgwQ63EuQCPo?si=dCuyFpeQSYGWZOFiJjDM7w"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Feel Good Cooking
               </a>
@@ -107,7 +107,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/0Vfh7Hiif45z9LdmyX1gVF?si=H9V24lm9TeiFbU62ssCPVw"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Dinner Chill
               </a>
@@ -121,7 +121,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/093IzRWO5nYZCoSK2C2YrJ?si=sFKQ6HvnSy-SS72iL5OHzw"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Brunch music
               </a>
@@ -135,7 +135,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/6Csz85e5CaohPBc2hggxGY?si=z0OrjGcKQrC_jwU9hS8hqQ"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Travel music
               </a>
@@ -149,7 +149,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/5xS3Gi0fA3Uo6RScucyct6?si=e6XF__L_STuXER4nzDJY0Q"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Party music
               </a>
@@ -163,7 +163,7 @@ function Playlist() {
                 href="https://open.spotify.com/playlist/3jbslfKMLLri91JYUXqEKz?si=dE9uj48HQbejnJI_MNEtdg"
                 target="_blank"
                 rel="noreferrer"
-                className="card-title hover:underline" className="playlist-title"
+                className="card-title hover:underline playlist-title"
               >
                 Motivation
               </a>

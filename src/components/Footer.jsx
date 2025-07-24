@@ -1,6 +1,6 @@
 function Footer() {
     return (
-        <footer className="footer footer-center p-4 bg-base-100 text-base-content fixed bottom-0 left-0 right-0 z-10 border-t border-base-300">
+        <footer className="footer footer-center p-4 text-base-content border-t border-base-300 fixed bottom-0 left-0 right-0 z-50 shadow-lg backdrop-blur-sm bg-base-100/95">
             <div className="grid grid-flow-col gap-4">
                 <a 
                     href="https://github.com/TheMediterraneans/the-mediterranean" 
@@ -10,7 +10,9 @@ function Footer() {
                 >
                     GitHub Repository
                 </a>
-                <span className="text-base-content/70 text-sm">Contact Us</span>
+                <a href="mailto:TheMediterraneans@themediterranean.com" className="link link-hover text-sm">
+                    Contact Us
+                </a>
             </div>
             <div>
                 <p className="text-base-content/70 text-sm">Made in The Mediterranean with ❤️</p>

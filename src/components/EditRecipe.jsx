@@ -213,15 +213,14 @@ const EditRecipe = ({ recipe, onEdit }) => {
   };
 
   return (
-    <div className="w-screen bg-base-200 pt-16">
+    <div className="w-screen bg-base-200">
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="mb-6 text-center">
-          <h1 className="text-2xl font-bold text-base-content mb-2" className="edit-recipe-title">Edit Recipe: {recipe?.title}</h1>
+          <h1 className="text-2xl font-bold text-base-content mb-2 edit-recipe-title">Edit Recipe: {recipe?.title}</h1>
           <p className="text-sm text-base-content/70">Fields marked with <span className="text-error">*</span> are required</p>
         </div>
         
         <div className="space-y-6">
-          
           <div className="card bg-base-100 shadow-md p-6">
             <h3 className="text-lg font-bold text-base-content mb-4">Basic Information</h3>
             <div className="space-y-4">
@@ -387,16 +386,16 @@ const EditRecipe = ({ recipe, onEdit }) => {
                   />
                   {ingredients.length > 1 && (
                     <button 
-                      className="btn btn-error btn-sm" className="delete-button-style"
+                      className="btn btn-error btn-sm delete-button-style"
                       onClick={() => removeIngredient(index)}
                     >
-                      ✕
+                      <span className="text-white">Remove</span>
                     </button>
                   )}
                 </div>
               ))}
               <button
-                className="btn btn-outline btn-sm gap-2" className="action-button"
+                className="btn btn-outline btn-sm gap-2 action-button"
                 onClick={addIngredient}
               >
                 <span className="text-lg">+</span>
@@ -471,9 +470,9 @@ const EditRecipe = ({ recipe, onEdit }) => {
           </div>
 
           
-          <div className="text-center">
+          <div className="text-center mb-20">
             <button 
-              className={`btn btn-wide gap-2 ${
+              className={`btn btn-wide gap-2 action-button ${
                 isFormValid() 
                   ? 'bg-blue-500 hover:bg-blue-600 text-white border-blue-500' 
                   : 'btn-disabled'
