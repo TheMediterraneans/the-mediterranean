@@ -3,14 +3,15 @@ import { getDatabase, ref, get, remove, set } from "firebase/database";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import EditRecipe from "../components/EditRecipe";
+import SpotifyEmbed from "../components/SpotifyEmbed";
 
 function RecipeDetails() {
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [targetServings, setTargetServings] = useState(null); // User-selected servings
-  const [isEditing, setIsEditing] = useState(false)
+  const [targetServings, setTargetServings] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     const db = getDatabase();
@@ -21,7 +22,7 @@ function RecipeDetails() {
         if (snapshot.exists()) {
           const data = snapshot.val();
           setRecipe(data);
-          setTargetServings(data.servings); // default to original
+          setTargetServings(data.servings);
         } else {
           console.warn("Recipe not found.");
         }
@@ -35,18 +36,17 @@ function RecipeDetails() {
 
   const handleEdit = async (id, updatedRecipe) => {
     try {
-        console.log('Attempting to save recipe:', updatedRecipe);
-      console.log('Recipe ID:', recipeId);
+      console.log("Attempting to save recipe:", updatedRecipe);
+      console.log("Recipe ID:", recipeId);
       const db = getDatabase();
       const recipeRef = ref(db, `recipes/${recipeId}`);
       await set(recipeRef, updatedRecipe);
-      console.log('Recipe saved successfully');
-      
-      // Update local state with the new recipe data
+      console.log("Recipe saved successfully");
+
       setRecipe(updatedRecipe);
       setTargetServings(updatedRecipe.servings);
       setIsEditing(false);
-      
+
       alert("Recipe updated successfully!");
     } catch (error) {
       console.error("Error saving changes:", error);
@@ -55,7 +55,6 @@ function RecipeDetails() {
   };
 
   const handleDelete = async () => {
-    // Confirm deletion
     const confirmDelete = window.confirm(
       `Are you sure you want to delete the recipe "${recipe.title}"? This action cannot be undone.`
     );
@@ -65,14 +64,12 @@ function RecipeDetails() {
     try {
       const db = getDatabase();
       const recipeRef = ref(db, `recipes/${recipeId}`);
-      
-      // Remove the recipe from Firebase
+
       await remove(recipeRef);
-      
+
       alert("Recipe deleted successfully!");
-      
-      // Navigate back to recipe list
-      navigate("/recipe-list");
+
+      navigate("/recipe-list/all");
     } catch (error) {
       console.error("Error deleting recipe:", error);
       alert("Error deleting recipe. Please try again.");
@@ -83,116 +80,204 @@ function RecipeDetails() {
     const ratio = targetServings / recipe.servings;
     return {
       ...ingredient,
-      quantity: Math.ceil(ingredient.quantity * ratio), // round to integer
+      quantity: Math.ceil(ingredient.quantity * ratio),
     };
   };
 
-  if (loading) return <div>Loading recipe... ⏳</div>;
-  if (!recipe) return <div>Recipe not found 😢</div>;
+  if (loading)
+    return (
+      <div className="w-screen">
+        <div className="max-w-4xl mx-auto px-4 py-8 flex items-center justify-center">
+          <div className="text-base-content">Loading recipe... ⏳</div>
+        </div>
+      </div>
+    );
+  if (!recipe)
+    return (
+      <div className="w-screen">
+        <div className="max-w-4xl mx-auto px-4 py-8 flex items-center justify-center">
+          <div className="text-base-content">Recipe not found 😢</div>
+        </div>
+      </div>
+    );
 
   if (isEditing) {
     return (
-        <div>
-            <h2>Edit Recipe</h2>
-            <EditRecipe recipe={{id: recipeId,...recipe}} onEdit={handleEdit}/>
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
+      <div>
+        <EditRecipe recipe={{ id: recipeId, ...recipe }} onEdit={handleEdit} />
+        <div className="w-screen bg-base-200">
+          <div className="max-w-4xl mx-auto px-4 py-8">
+            <div className="flex justify-center">
+              <button
+                onClick={() => setIsEditing(false)}
+                className="btn btn-ghost text-base-content"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         </div>
-    )
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>{recipe.title}</h1>
-      <img
-        src={recipe.imageUrl}
-        alt={recipe.title}
-        style={{ maxWidth: "300px" }}
-      />
-      <p>
-        <strong>Category:</strong> {recipe.category}
-      </p>
-      <p>
-        <strong>Description:</strong> {recipe.description}
-      </p>
-      <p>
-        <strong>Difficulty:</strong> {recipe.difficulty}
-      </p>
-      <p>
-        <strong>Original Servings:</strong> {recipe.servings}
-      </p>
+    <div className="w-screen bg-base-200">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-bold text-base-content mb-2">
+            {recipe.title}
+          </h1>
+        </div>
 
-      {/* Servings Modifier */}
-      <label>
-        <strong>Adjust Servings:</strong>
-        <input
-          type="number"
-          value={targetServings}
-          onChange={(e) => setTargetServings(Number(e.target.value))}
-          min={1}
-          style={{ marginLeft: "10px", width: "60px" }}
-        />
-      </label>
+        <div className="mb-6">
+          <img
+            className="w-full max-w-xl mx-auto rounded object-cover"
+            src={recipe.imageUrl}
+            alt={recipe.title}
+            style={{ maxHeight: "300px" }}
+          />
+        </div>
 
-      <h3>Ingredients for {targetServings} servings:</h3>
-      <ul>
-        {recipe.ingredients.map((ingredient, index) => {
-          const scaled = scaleIngredient(ingredient);
-          return (
-            <li key={index}>
-              {scaled.quantity} {scaled.unit} {scaled.name}
-            </li>
-          );
-        })}
-      </ul>
+        <div className="card bg-base-100 shadow p-4 mb-6">
+          <div className="mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="p-2 bg-base-200 rounded">
+                <p className="text-base-content">
+                  <strong>Category:</strong> {recipe.category}
+                </p>
+              </div>
 
-      <h3>Preparation Steps:</h3>
-      <p>{recipe.preparationSteps}</p>
+              <div className="p-2 bg-base-200 rounded">
+                <p className="text-base-content">
+                  <strong>Difficulty:</strong> {recipe.difficulty}
+                </p>
+              </div>
+            </div>
 
-      {recipe.musicUrl && (
-        <p>
-          🎵{" "}
-          <a href={recipe.musicUrl} target="_blank" rel="noreferrer">
-            Listen while cooking
-          </a>
-        </p>
-      )}
-      {recipe.notes && (
-        <p>
-          <strong>Notes:</strong> {recipe.notes}
-        </p>
-      )}
-      {recipe.tags?.length > 0 && (
-        <p>
-          <strong>Tags:</strong> {recipe.tags.join(", ")}
-        </p>
-      )}
+            <div className="p-2 bg-base-200 rounded">
+              <h3 className="font-bold mb-2 text-base-content">Description</h3>
+              <p className="text-base-content/70">{recipe.description}</p>
+            </div>
+          </div>
 
-      
-      <div style={{ marginTop: "20px" }}>
-        <Link to="/recipe-list">
-          <button style={{ marginRight: "10px" }}>Back to Recipes</button>
-        </Link>
+          <div className="bg-primary/20 p-3 rounded mb-4">
+            <div className="flex items-center justify-center gap-2">
+              <label className="font-bold text-base-content">
+                Adjust Servings:
+              </label>
+              <input
+                type="number"
+                value={targetServings}
+                onChange={(e) => setTargetServings(Number(e.target.value))}
+                min={1}
+                className="input input-bordered input-sm w-16 text-center"
+              />
+            </div>
+          </div>
 
-        <button 
-          onClick={() => setIsEditing(true)}
-          style={{ 
-            marginRight: "10px",
-            backgroundColor: "#007bff",
-            color: "white",
-            border: "none",
-            padding: "8px 16px",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
-        >
-          Edit Recipe
-        </button>
-        
-        
-        <button 
-          onClick={handleDelete}>
-          Delete Recipe
-        </button>
+          <div className="mb-4">
+            <h3 className="text-lg font-bold mb-2 text-base-content">
+              Ingredients for {targetServings} servings
+            </h3>
+            <div className="bg-base-200 p-3 rounded">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-1">
+                {recipe.ingredients.map((ingredient, index) => {
+                  const scaled = scaleIngredient(ingredient);
+                  return (
+                    <li
+                      key={index}
+                      className="bg-base-100 p-2 rounded border-l-2 border-primary"
+                    >
+                      <span className="text-base-content">
+                        {scaled.quantity} {scaled.unit} {scaled.name}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <h3 className="text-lg font-bold mb-2 text-base-content">
+              Preparation Steps
+            </h3>
+            <div className="bg-base-200 p-3 rounded">
+              <p className="whitespace-pre-line text-base-content">
+                {recipe.preparationSteps}
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {recipe.notes && (
+              <div className="bg-base-200 p-3 rounded">
+                <h4 className="font-bold mb-1 text-base-content">Notes:</h4>
+                <p className="text-base-content">{recipe.notes}</p>
+              </div>
+            )}
+
+            {recipe.tags?.length > 0 && (
+              <div className="bg-base-200 p-3 rounded">
+                <h4 className="font-bold mb-1 text-base-content">Tags:</h4>
+                <div className="flex flex-wrap gap-1">
+                  {recipe.tags.map((tag, index) => (
+                    <span key={index} className="badge badge-outline">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {recipe.musicUrl && (
+            <div className="bg-base-200 p-3 rounded mb-4">
+              <a
+                href={recipe.musicUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn btn-accent btn-sm flex items-center gap-2"
+              >
+                🎵 Your Music Reccommendation
+              </a>
+            </div>
+          )}
+
+          {recipe.musicUrl && (
+            <div className="mb-4">
+              <h3 className="text-lg font-bold mb-2 text-base-content">
+                🎵 Our Music Reccommendation
+              </h3>
+              <div className="bg-base-200 p-3 rounded">
+                <SpotifyEmbed url={recipe.musicUrl} />
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
+          <Link to="/recipe-list/all">
+            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500">
+              ← Back to Recipes
+            </button>
+          </Link>
+
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500"
+          >
+            Edit Recipe
+          </button>
+
+          <button
+            onClick={handleDelete}
+            className="btn bg-red-500 hover:bg-red-600 text-white border-red-500"
+          >
+            Delete Recipe
+          </button>
+        </div>
       </div>
     </div>
   );

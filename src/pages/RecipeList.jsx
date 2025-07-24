@@ -1,5 +1,7 @@
+
 import { Link, useParams } from "react-router-dom";
 import DifficultyBadge from "../components/DifficultyBadge";
+
 
 function RecipeList({ recipes, loading }) {
   const { category } = useParams();
@@ -8,54 +10,70 @@ function RecipeList({ recipes, loading }) {
     category === "all"
       ? recipes
       : recipes.filter((recipe) => {
-          return recipe.category === category;
-        });
+        return recipe.category === category;
+      });
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="w-screen"><div className="max-w-4xl mx-auto px-4 py-8 flex items-center justify-center"><div className="text-base-content">Loading recipes... ⏳</div></div></div>;
 
   return (
-    <div>
-      <Link to="/create">
-        <button>Create a new recipe</button>
-      </Link>
+    <div className="w-screen">
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-base-content mb-6">
+            {category === "all" ? "All Recipes" : `${category.charAt(0).toUpperCase() + category.slice(1)} Recipes`}
+          </h1>
+          <Link to="/create">
+            <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500 btn-wide gap-2">
+              <span className="text-lg">+</span>
+              Create New Recipe
+            </button>
+          </Link>
+        </div>
 
-      <div className="container mx-auto px-6 py-8">
-        <ul className="list-row space-y-8">
-          {filteredRecipes.map((recipe) => (
-            <li key={recipe.id} className="list-row">
-              <div
-                className="card w-full max-w-4xl mx-auto
-                bg-base-100 border-2 border-warning
-                rounded-2xl shadow-md
-                hover:shadow-xl hover:scale-[1.02]
-                transition duration-200 overflow-hidden"
-              >
-                {/* <div className="w-full h-1 bg-gradient-to-r from-emerald-400 via-teal-500 to-cyan-600" /> */}
-                <div className="card-body flex flex-col">
-                  <h2 className="card-title text-2xl">{recipe.title}</h2>
-                  <p>Category: {recipe.category}</p>
-                  <div className="mt-2">
-                    Difficulty: <DifficultyBadge level={recipe.difficulty} />
+        <div className="space-y-6">
+          <ul className="space-y-6">
+            {filteredRecipes.map((recipe) => (
+              <li key={recipe.id}>
+                <div className="card bg-base-100 shadow-md hover:shadow-lg transition-shadow duration-300">
+                  <div className="card-body">
+                    <div className="flex justify-between items-start mb-4">
+                      <h2 className="card-title text-2xl text-base-content">{recipe.title}</h2>
+                      <DifficultyBadge level={recipe.difficulty} />
+                    </div>
+                    
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="badge badge-outline">{recipe.category}</span>
+                    </div>
+                    
+                    <p className="text-base-content/80 mb-4">
+                      {recipe.description}
+                    </p>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-2 text-base-content/70">
+                        <span className="text-lg">🎵</span>
+                        <a 
+                          href={recipe.musicUrl} 
+                          target="_blank" 
+                          rel="noreferrer" 
+                          className="link link-primary hover:link-hover font-medium text-sm"
+                        >
+                          Listen while cooking
+                        </a>
+                      </div>
+                      <Link to={`/recipes/${recipe.id}`}>
+                        <button className="btn bg-blue-500 hover:bg-blue-600 text-white border-blue-500 btn-sm normal-case gap-1">
+                          View Recipe
+                          <span className="text-xs">→</span>
+                        </button>
+                      </Link>
+                    </div>
                   </div>
-                  <p className="mt-2 text-secondary-content">
-                    {recipe.description}
-                  </p>
-                  <p>
-                    🎵{" "}
-                    <a href={recipe.musicUrl} target="_blank" rel="noreferrer">
-                      Cooking Mood
-                    </a>
-                  </p>
-                  <Link to={`/recipes/${recipe.id}`}>
-                    <button className="btn btn-primary btn-sm">
-                      View full recipe!
-                    </button>
-                  </Link>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

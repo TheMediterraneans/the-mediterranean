@@ -14,7 +14,7 @@ function Homepage({ recipes }) {
     }
   }
 
-  // Category to image mapping - you can customize these URLs or use local images
+  // category to image mapping
   const categoryImages = {
     "appetizers": "https://res.cloudinary.com/dr1xea5ry/image/upload/v1753282453/Cajun_Shrimp_Appetizer_Verticle_zkgl0z.jpg",
     "sides": "https://res.cloudinary.com/dr1xea5ry/image/upload/v1753281990/Lobster-Salad-Lasarte-Review-Menu-2_281_of_1_29_rdwtts.jpg",
@@ -34,17 +34,17 @@ function Homepage({ recipes }) {
     "vegetarian": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=400&fit=crop&crop=center",
     "vegan": "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=400&fit=crop&crop=center",
     "gluten-free": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=400&fit=crop&crop=center",
-    // Default fallback image
+    // default fallback image
     "default": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=400&fit=crop&crop=center"
   };
 
-  // Function to get image for category
+  // function to get image for category
   const getCategoryImage = (category) => {
     const normalizedCategory = category.toLowerCase();
     return categoryImages[normalizedCategory] || categoryImages["default"];
   };
 
-  // Function to capitalize category names nicely
+  // function to capitalize category names nicely
   const formatCategoryName = (category) => {
     return category
       .split(' ')
@@ -52,35 +52,35 @@ function Homepage({ recipes }) {
       .join(' ');
   };
 
-  //return a link to recipe list page that triggers event to update state to match the category of the link
+    //return a link to recipe list page based on the category
   function displayCategory(category, categoryName) {
     const imageUrl = getCategoryImage(category);
     
     return (
       <Link to={`/recipe-list/${category}`} key={category}>
-        <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer overflow-hidden">
-          {/* Image container */}
+        <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] cursor-pointer overflow-hidden border border-base-200">
+
           <figure className="aspect-square overflow-hidden">
             <img 
               src={imageUrl} 
               alt={`${categoryName} category`}
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
               onError={(e) => {
-                // Fallback if image fails to load
                 e.target.src = categoryImages["default"];
               }}
             />
           </figure>
           
-          {/* Category name overlay */}
-          <div className="card-body absolute inset-0 bg-black/40 flex items-end justify-center p-4">
-            <h3 className="card-title text-white text-center text-lg font-bold drop-shadow-lg">
-              {formatCategoryName(categoryName)}
-            </h3>
+          <div className="card-body absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex items-center justify-center p-6">
+            <div className="text-center">
+              <h3 className="text-white mt-10 text-2xl font-extrabold drop-shadow-2xl tracking-wider uppercase mb-2 transform transition-transform duration-300 hover:scale-105">
+                {formatCategoryName(categoryName)}
+              </h3>
+              <div className="w-16 h-0.5 bg-white/80 mx-auto rounded-full"></div>
+            </div>
           </div>
           
-          {/* Optional: Badge for number of recipes in category */}
-          <div className="badge badge-primary badge-lg absolute top-4 right-4">
+          <div className="badge bg-blue-500 text-white border-blue-500 badge-lg absolute top-3 right-3 shadow-md">
             {recipes.filter(recipe => recipe.category === category).length}
           </div>
         </div>
@@ -89,8 +89,8 @@ function Homepage({ recipes }) {
   }
 
   return (
-    <div>
-      <div className="w-screen min-h-screen bg-base-200">
+
+      <div className="w-screen">
         <div className="flex justify-center">
           <div className="max-w-4xl mx-auto px-4 py-12 text-center">
             <h1 className="max-w-5xl mx-auto px-4 text-center text-4xl font-bold mb-4">
@@ -118,7 +118,6 @@ function Homepage({ recipes }) {
           </div>
         </div>
       </div>
-    </div>
   );
 }
 

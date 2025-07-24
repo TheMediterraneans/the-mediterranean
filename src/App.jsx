@@ -98,7 +98,7 @@ const deleteRecipe = (recipeId) => {
 
       <Routes>
         <Route path="/" element={<Homepage recipes={recipes} />} />
-        {/* <Route path="/recipe-list" element={<RecipeList recipes={recipes} loading={loading} />} /> */}
+        
         <Route path="/recipe-list/:category?" element={<RecipeList recipes={recipes} laoding={loading} />} />
         <Route path="/*" element={<PageNotFound />} />
         <Route path="/create" element={<AddRecipe onCreate={createNewRecipe} />} />

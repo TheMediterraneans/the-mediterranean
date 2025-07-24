@@ -1,10 +1,10 @@
-import { Home, BookOpen, Cookie, Music, Edit3, Info } from "lucide-react";
+import { BookOpen, Cookie, Music, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
     <>
-      <nav className="navbar bg-base-100 shadow-md px-6">
+      <nav className="navbar bg-base-100 shadow-md px-6 fixed top-0 left-0 right-0 z-20">
         <div className="navbar-start">
           <Link to="/" className="normal-case text-4xl flex items-center">
             <Cookie className="w-8 h-8 mr-2 text-primary" />
@@ -19,19 +19,12 @@ function Navbar() {
             </li>
             <li>
               <Link to="/playlist">
-                <a className="flex items-center">
+                <span className="flex items-center">
                   <Music className="w-5 h-5 mr-2" />
-                  Music
-                </a>
+                  Music Ideas
+                </span>
               </Link>
             </li>
-            {/* Maybe only render this for logged in users? */}
-            {/* <li>
-              <a className="flex items-center">
-                <Edit3 className="w-5 h-5 mr-2" />
-                Journal
-              </a>
-            </li> */}
             <li>
               <a className="flex items-center">
                 <Info className="w-5 h-5 mr-2" />
