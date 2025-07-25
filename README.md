@@ -1,12 +1,78 @@
-# React + Vite
+# Foodlings
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+_Enjoy exploring the flavors and sounds of the Mediterranean! 🎵🍽️_
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Foodlings is a web application that combines the best of Mediterranean cuisine with music recommendations.
 
-## Expanding the ESLint configuration
+Users can explore various Mediterranean recipes while discovering music that pairs perfectly with cooking or eating every delicious dish.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This application is meant to showcase our love for sharing some of the best things: food and music!
+
+## Technologies Used
+
+- **Frontend**: React
+- **Database**: Firebase Realtime Database
+- **Styling**: CSS3, Tailwind CSS, DaisyUI
+- **Build Tool**: Vite
+
+## Features
+
+- Browse a collection of Mediterranean recipes
+- View recipe instructions and adjust ingredients for different number of servings
+- Get music recommendations for cooking or enjoying each recipe
+- Add your own recipes and music combinations
+- Modify existing recipes
+- Responsive design for mobile and desktop
+
+## Installation & Setup
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm or yarn package manager
+
+### Steps to Run Locally
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/TheMediterraneans/the-mediterranean.git
+   cd the-mediterranean
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Firebase Configuration**
+   The project includes Firebase configuration in firebaseconfig.js. This file contains the necessary Firebase credentials and is already set up for you.
+
+4. **Run the application**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+
+   Navigate to `http://localhost:[port]`
+
+## Demo
+
+🌐 **Live Demo**: [View the deployed application](https://foodlings.netlify.app/)
+
+## Future Improvements
+
+- **User Authentication**: Allow users to create accounts and log in
+- **Favorite Recipes**: Users can save their favorite recipes to a personal list
+- **Memories and Notes**: Authenticated users can additionally add memories, journal entries and other notes to each recipe
+- **Multiple Music Recommendations**: Users can submit and view multiple music suggestions per recipe
+- **Recipe Ratings**: Users can rate and review recipes
+- **Search Functionality**: Advanced search and filtering options
+
+## Team
+
+Created by Luana + Zefi as part of the Ironhack Web Development bootcamp.
