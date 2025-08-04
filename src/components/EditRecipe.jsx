@@ -280,18 +280,6 @@ const EditRecipe = ({ recipe, onEdit }) => {
                   <option value="sides">Sides</option>
                   <option value="desserts">Desserts</option>
                   <option value="snacks">Snacks</option>
-                  <option value="breakfast">Breakfast</option>
-                  <option value="lunch">Lunch</option>
-                  <option value="dinner">Dinner</option>
-                  <option value="drinks">Drinks</option>
-                  <option value="salads">Salads</option>
-                  <option value="soups">Soups</option>
-                  <option value="pasta">Pasta</option>
-                  <option value="pizza">Pizza</option>
-                  <option value="seafood">Seafood</option>
-                  <option value="vegetarian">Vegetarian</option>
-                  <option value="vegan">Vegan</option>
-                  <option value="gluten-free">Gluten-Free</option>
                 </select>
                 {errors.category && (
                   <div className="label">
